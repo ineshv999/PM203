@@ -1,21 +1,40 @@
 let pedidos = [];
-let totalAcumulado = 0;
 
-function agregarPedido(){
-
-    let producto = prompt("Escribe tu producto");
-    let precio = prompt("Escribe tu precio");
-
-    pedidos.push({producto, precio});
-    totalAcumulado += precio;
-    console.log(`Pedido agregado: ${producto} - $${precio}`);
+function agregarPedido(producto, precio) {
+  pedidos.push({ producto, precio });
+  console.log(`Pedido agregado: ${producto} - $${precio}`);
 }
 
-function mostrarPedidos(){
-    console.log("Pedidos actuales:");
-    pedidos.forEach((pedido, index) => {
-        console.log(`${index + 1}. ${pedido.producto} - $${pedido.precio}`);
-    });
-    console.log(`Total acumulado: $${totalAcumulado}`);
-    console.table(pedidos);
+function calcularTotales() {
+  const subtotal = pedidos.reduce((acum, { precio }) => acum + precio, 0);
+ 
+  const iva      = subtotal * 0.16;
+  const total    = subtotal + iva;
+ 
+  return { subtotal, iva, total };
+}
+ 
+function mostrarPedidos() {
+  console.log("\n===== PEDIDOS =====");
+  pedidos.forEach(({ producto, precio }, index) => {
+    console.log(`${index + 1}. ${producto} - $${precio.toFixed(2)}`);
+  });
+ 
+  const { subtotal, iva, total } = calcularTotales();
+ 
+  console.log("-------------------");
+  console.log(`  Subtotal: $${subtotal.toFixed(2)}`);
+  console.log(`  IVA 16%:  $${iva.toFixed(2)}`);
+  console.log(`  Total:    $${total.toFixed(2)}`);
+  console.log("===================\n");
+}
+
+function hacerPromociones(productos) {
+  const promos = productos.map((p) => ({
+    ...p,
+    precioPromo: parseFloat((p.precio * 0.9).toFixed(2)),
+    descuento:   "10% off",
+  }));
+ 
+  return promos;
 }

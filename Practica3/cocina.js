@@ -46,7 +46,6 @@ function AgregarProducto() {
     localStorage.setItem("productos", JSON.stringify(productos));
 
     console.table(productos)
-
 }
 
 function EditarProducto() {
@@ -94,7 +93,6 @@ function EliminarProducto() {
     let indice = prompt("Escribe el índice del producto a eliminar");
 
     productos.splice(indice, 1);
-
     localStorage.setItem("productos", JSON.stringify(productos));
 
     console.table(productos)
@@ -127,7 +125,6 @@ function categoria() {
     }
 
     let productosFiltrados = productos.filter(producto => producto.categoria === categoria);
-
     console.table(productosFiltrados)
     
 }
@@ -135,7 +132,6 @@ function categoria() {
 function productoscaros() {
     
     let productosCaros = productos.filter(producto => producto.precio >= 40.0);
-
     console.table(productosCaros)
     
 }
@@ -143,7 +139,6 @@ function productoscaros() {
 function productosbaratos() {
     
     let productosBaratos = productos.filter(producto => producto.precio < 40);
-
     console.table(productosBaratos)
     
 }
