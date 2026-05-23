@@ -29,3 +29,29 @@ function productos_disponibles(productos){
     });
     console.table(disponibles);
 }
+
+function esperar(tiempo){
+
+    return new Promise(resolve => {
+
+        setTimeout(resolve, tiempo);
+
+    });
+
+}
+
+async function mostrar_estado_pedido(pedidos){
+
+    for(const pedido of pedidos){
+
+        console.log(`
+            Pedido
+            Producto: ${pedido.producto}
+            Estado: ${pedido.estatus}
+        `);
+
+        await esperar(2000);
+
+    }
+
+}

@@ -10,7 +10,7 @@ function agregarPedido() {
     return;
   }
 
-  let { nombre: producto, precio } = productos[indice];
+  let { nombre: producto, precio, estatus } = productos[indice];
 //   pedidos.push({ producto, precio });
   let pedido = { producto, precio, estatus: "Pediente" };
   pedidos.push(pedido);

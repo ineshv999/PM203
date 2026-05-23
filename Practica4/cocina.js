@@ -144,67 +144,92 @@ function productosbaratos() {
     
 }
 
-function prepararPedido() {
-
-    let pedido = prompt("Selecciona un pedido:");
-
-    console.log(`Pedido seleccionado: ${pedido}`);
-
-    let estatus = prompt(
-        "Selecciona su estatus:\n" +
-        "1. Preparando\n" +
-        "2. Listo\n"
-    );
+async function prepararPedido() {
 
     let pedidoEstatus;
 
-    switch (estatus) {
+    let pedido = parseInt(
+        prompt("Selecciona el número del pedido:")
+    ) - 1;
 
-        case "1":
-            pedidoEstatus = "Preparando";
-            break;
+    console.log(`Pedido seleccionado: ${pedido}`);
 
-        case "2":
-            pedidoEstatus = "Listo";
-            break;
+    if (pedidos[pedido]) {
 
-        case "3":
-            pedidoEstatus = "Falta un ingrediente";
-            break;
+        let estatus = Math.floor(Math.random() * 4) + 1;
 
-        default:
-            pedidoEstatus = "Error en la cocina";
+        const promesa = new Promise((resolve, reject) => {
 
-    }
+            if (estatus === 3) {
 
-    productos[pedido] = {
-        estatus: pedidoEstatus
-    };
+                pedidos[pedido].estatus = "Faltan ingredientes";
 
-    const promesa = new Promise((resolve, reject) => {
+                reject(
+                    "Error: faltan ingredientes"
+                );
 
-        if (estatus === "1" || estatus === "2") {
+            } else if (estatus === 4) {
 
-            resolve(`Pedido en proceso: ${pedidoEstatus}`);
+                pedidos[pedido].estatus ="Error en la cocina";
 
-        } else {
+                reject(
+                    "Error en la cocina"
+                );
 
-            reject(`Error: ${pedidoEstatus}`);
+            } else {
 
-        }
+                resolve();
 
-    });
+            }
 
-    promesa
-        .then((mensaje) => {
+        });
 
-            console.log(mensaje);
+        try {
 
-        })
-        .catch((error) => {
+            await promesa;
+
+            console.log("Pedido continúa...");
+
+        } catch(error) {
 
             console.log(error);
 
-        });
+            return;
+
+        }
+
+
+        estatus = prompt(
+            "Selecciona su estatus:\n" +
+            "1. Preparando\n" +
+            "2. Listo\n"
+        );
+
+        switch (estatus) {
+
+            case "1":
+                pedidoEstatus = "Preparando";
+                break;
+
+            case "2":
+                pedidoEstatus = "Listo";
+                break;
+
+            default:
+                pedidoEstatus = "Error";
+
+        }
+
+        pedidos[pedido].estatus = pedidoEstatus;
+
+        console.log(
+            `Pedido actualizado a ${pedidoEstatus}`
+        );
+
+    } else {
+
+        console.log("Pedido no encontrado");
+
+    }
 
 }
