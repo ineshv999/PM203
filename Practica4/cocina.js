@@ -198,7 +198,6 @@ async function prepararPedido() {
 
         }
 
-
         estatus = prompt(
             "Selecciona su estatus:\n" +
             "1. Preparando\n" +
