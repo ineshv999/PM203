@@ -177,45 +177,32 @@ async function prepararPedido() {
                 );
 
             } else {
-
                 resolve();
-
             }
 
         });
 
         try {
-
             await promesa;
-
             console.log("Pedido continúa...");
 
         } catch(error) {
-
             console.log(error);
-
             return;
 
         }
 
         estatus = prompt(
-            "Selecciona su estatus:\n" +
-            "1. Preparando\n" +
-            "2. Listo\n"
+            "Selecciona su estatus:\n" +"1. Preparando\n" +"2. Listo\n"
         );
 
         switch (estatus) {
 
-            case "1":
-                pedidoEstatus = "Preparando";
-                break;
+            case "1":pedidoEstatus = "Preparando";break;
 
-            case "2":
-                pedidoEstatus = "Listo";
-                break;
+            case "2":pedidoEstatus = "Listo";break;
 
-            default:
-                pedidoEstatus = "Error";
+            default:pedidoEstatus = "Error";
 
         }
 
