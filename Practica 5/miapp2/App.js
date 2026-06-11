@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
 
-      <Image source={require('./assets/wave.png')}/>
+      {/* <Image source={require('./assets/wave.png')}/>
       <Text>Hola mundo React Native</Text>
 
       <Text>------------ Componente Propio Simple -----------</Text>
@@ -20,8 +20,20 @@ export default function App() {
       <Text>------------ Componente Propio Compuesto -----------</Text>
       <Saludo2></Saludo2>
 
-      <Text>------------ Componente Propio Perfil -----------</Text>
-      <Perfil></Perfil>
+      <Text>------------ Componente Propio Perfil -----------</Text> */}
+
+      <Perfil 
+      nombre="Ines" 
+      carrera="Sistemas"
+      materia="Programacion movil" 
+      cuatri="9">
+      </Perfil>
+
+      <Perfil 
+      nombre="Lalo" 
+      carrera="Sistemas"
+      materia="Programacion movil" 
+      cuatri="9" />
       
       <StatusBar style="auto" />
 
