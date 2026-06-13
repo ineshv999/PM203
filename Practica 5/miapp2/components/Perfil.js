@@ -1,20 +1,20 @@
 /* Perfil usando Desestructuracion */
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, StyleSheet } from "react-native";
 import React, {useState} from "react";
 
 export const Perfil=({nombre, carrera, materia, cuatri})=>{
     const [mostrar, setMostrar] = useState(false);
 
     return(
-        <View>
-            <Text>{nombre}</Text>
+        <View style={styles.tarjeta}>
+            <Text style={styles.nombre}>{nombre}</Text>
 
             {/* Renderizado condicional */}
             {mostrar && 
             <>
-            <Text>{carrera}</Text>
-            <Text>{materia}</Text>
-            <Text>{cuatri}</Text>
+            <Text style={styles.carrera}>{carrera}</Text>
+            <Text style={styles.otroTexto}>{materia}</Text>
+            <Text style={styles.otroTexto}>{cuatri}</Text>
             </>
             }
 
@@ -24,18 +24,28 @@ export const Perfil=({nombre, carrera, materia, cuatri})=>{
     )
 }
 
-/* Perfil usando Objeto  Props */
-/* import { Text, View } from "react-native";
+const styles =StyleSheet.create({
+    nombre:{
+        fontSize: 24,
+        fontWeight: 600,
+        textTransform: 'uppercase'
+    },
+    carrera:{
+        fontSize: 18,
+        color: 'blue',
+        fontFamily: 'Roboto',
+    },
+    otroTexto:{
+        fontSize: 12,
+        fontFamily: 'Courier',
+        fontStyle: 'italic',
+    },
+    tarjeta:{
+        borderWidth: 2,
+        padding: 25,
+        margin: 15,
+    },
+})
 
-export const Perfil=(props)=>{
 
-    return(
-        <View>
-            <Text>{props.nombre}</Text>
-            <Text>{props.carrera}</Text>
-            <Text>{props.materia}</Text>
-            <Text>{props.cuatri}</Text>
-        </View>
-    )
-} */
 
