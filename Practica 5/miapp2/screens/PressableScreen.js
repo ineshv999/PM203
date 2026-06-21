@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Switch, Pressable } from 'react-native';
 
-
 /* Zona2: Main - Hogar de los componentes */
 export default function PressableScreen() {
 
@@ -42,7 +41,6 @@ export default function PressableScreen() {
       <Text style={styles.buttonText}>Guardar Cambios</Text>
 
       </Pressable>
-
       
       <StatusBar style="auto" />
 
