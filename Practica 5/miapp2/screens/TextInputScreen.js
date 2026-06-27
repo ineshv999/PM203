@@ -13,7 +13,7 @@ if (Platform.OS === "web") {
   };
 }
 
-export default function App() {
+export default function TextInputScreen() {
   const [nombre, setNombre] = useState();
   const [correo, setCorreo] = useState();
   const [contraseña, setContraseña] = useState();
