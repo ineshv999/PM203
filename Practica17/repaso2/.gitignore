@@ -1,0 +1,48 @@
+# Dependencias
+node_modules/
+
+# Expo
+.expo/
+.expo-shared/
+
+# Build
+web-build/
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables de entorno
+.env
+.env.*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Android
+android/.gradle/
+android/app/build/
+android/build/
+
+# iOS
+ios/build/
+DerivedData/
+
+# Metro
+.metro-health-check*
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Cobertura de pruebas
+coverage/
