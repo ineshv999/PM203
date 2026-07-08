@@ -11,7 +11,8 @@ import {
   FlatList,
   TextInput,
   Pressable,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 
 /* Zona 2: Main */
@@ -26,6 +27,7 @@ export default function App() {
 
   const [listaLibros, setListaLibros] = useState([]);
   const [vista] = useState('flat');
+  const [cargando, setCargando] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -36,33 +38,33 @@ export default function App() {
   const registro = () => {
 
     if (nombre.trim() === '' || autor.trim() === '' || genero.trim() === '') {
-      alert("Complete todos los campos.");
+      Alert.alert("Complete todos los campos.");
       return;
     }
 
-    const nuevoLibro = {
-      id: Date.now().toString(),
-      nombre,
-      autor,
-      genero,
-    };
+    setCargando(true);
 
-    setListaLibros([...listaLibros, nuevoLibro]);
+    setTimeout(() => {
 
-    setNombre('');
-    setAutor('');
-    setGenero('');
+      const nuevoLibro = {
+        id: Date.now().toString(),
+        nombre,
+        autor,
+        genero,
+      };
 
-    Alert.alert(
-    "Registro exitoso");
-  };
+      setListaLibros(prev => [...prev, nuevoLibro]);
 
-  const toggleFavorito = (id) => {
-    setFavoritos((prev) =>
-      prev.includes(id)
-        ? prev.filter((x) => x !== id)
-        : [...prev, id]
-    );
+      setNombre('');
+      setAutor('');
+      setGenero('');
+
+      setCargando(false);
+
+      Alert.alert("Registro exitoso");
+
+    }, 4000);
+
   };
 
   if (splash) {
@@ -121,6 +123,14 @@ export default function App() {
           onPress={registro}
         />
 
+        {cargando && (
+          <ActivityIndicator
+            animating={true}
+            size="large"
+            color="green"
+          />
+        )}
+
         <Text style={styles.footer}>
           Total de libros: {listaLibros.length}
         </Text>
@@ -147,9 +157,7 @@ export default function App() {
             renderItem={({ item }) => (
 
               <Pressable
-                style={styles.item}
-                onPress={() => toggleFavorito(item.id)}
-              >
+                style={styles.item}>
 
                 <View>
 
