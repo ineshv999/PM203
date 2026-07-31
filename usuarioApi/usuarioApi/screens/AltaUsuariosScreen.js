@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,Alert, Platform,} from 'react-native';
+import { apiFetch } from '../utils/api';
 
 export default function App() {
 
@@ -20,29 +21,38 @@ export default function App() {
   const guardarUsuarios = async()=>{
 
     if(nombre.trim()==='' || edad.trim()==='' ){
-      mostrarMensaje("Vacios", "Todos los cambios son obligatorios");
+      mostrarMensaje("Campos vacíos", "Todos los campos son obligatorios");
+      return;
+    }
+
+    const edadNumero = Number(edad);
+    if (!Number.isInteger(edadNumero) || edadNumero < 0 || edadNumero > 120) {
+      mostrarMensaje("Edad inválida", "Escribe una edad entre 0 y 120");
       return;
     }
 
     try{
       setCargando(true)
-      const respuesta = await fetch('http://localhost:5000/v1/usuarios/',
-        {
+      const respuesta = await apiFetch('/usuarios/', {
           method:"POST",
-          headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({nombre:nombre, edad:edad})
+          body: JSON.stringify({nombre: nombre.trim(), edad: edadNumero})
         });
 
       const datos = await respuesta.json();
       console.log(datos);
-      mostrarMensaje("Exito", "Se guardo el usuario");
+
+      if (!respuesta.ok) {
+        throw new Error(datos.detail?.[0]?.msg || datos.detail || "No se pudo guardar el usuario");
+      }
+
+      mostrarMensaje("Éxito", "Se guardó el usuario");
 
       setNombre('');
       setEdad('');
 
     }catch(error){
       console.log("Error API: ", error);
-      mostrarMensaje("Error", "No fue posible guardar el usuario");
+      mostrarMensaje("Error", error.message || "No fue posible guardar el usuario");
     }finally{
       setCargando(false);
     }
