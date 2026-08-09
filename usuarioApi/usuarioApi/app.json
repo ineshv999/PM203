@@ -1,33 +1,60 @@
 {
   "expo": {
-    "name": "repa2",
+    "name": "Practica 22",
     "slug": "repa2",
     "version": "1.0.0",
+
     "orientation": "portrait",
-    "icon": "./assets/splash-icon.png",
+
+    "icon": "./assets/icono2.png",
+
     "userInterfaceStyle": "light",
+
     "newArchEnabled": true,
+
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/icono2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFFFFF"
     },
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icono2.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.ineshv.repa2"
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "plugins": [
       "expo-router",
-      "expo-font"
-    ]
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ],
+
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "fb1334b6-df80-4611-aa07-452c7efee0cf"
+      }
+    },
+
+    "owner": "ineshv"
   }
 }
