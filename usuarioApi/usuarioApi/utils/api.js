@@ -1,7 +1,5 @@
 import { basicAuth } from "./auth";
 
-// En un APK, localhost apunta al telefono, no a la computadora que ejecuta la API.
-// EXPO_PUBLIC_API_URL permite cambiar el servidor sin modificar este archivo.
 const BASE_URL = (process.env.EXPO_PUBLIC_API_URL || "http://192.168.0.7:5000/v1")
   .replace(/\/$/, "");
 
